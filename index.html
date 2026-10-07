@@ -9,10 +9,10 @@
         <meta name="description" content="Acompáñanos a celebrar el bautizo y cumpleaños de Mael el 2 de enero de 2027.">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="style.css?v=20261007-dinos-2">
-        <script src="evento.js?v=20261007-dinos-2" defer>
+        <link rel="stylesheet" href="style.css?v=20261007-musica-1">
+        <script src="evento.js?v=20261007-musica-1" defer>
         </script>
-        <script src="script.js?v=20261007-dinos-3" defer>
+        <script src="script.js?v=20261007-musica-1" defer>
         </script>
     </head>
     <body>
@@ -36,6 +36,10 @@
                 <p class="subtitle">
                     Mi bautizo y cumpleaños
                 </p>
+                <div class="musica-portada" hidden id="musicaPortada">
+                    <p>Una canción para acompañar esta aventura</p>
+                    <button id="musicPortadaBtn" type="button">♫ Escuchar música</button>
+                </div>
                 <p class="fecha" id="fechaTexto">
                     2 de enero de 2027
                 </p>
@@ -296,7 +300,7 @@
         <button id="musicBtn" class="floating music" aria-label="Reproducir música" hidden>
             ♫
         </button>
-        <audio id="musica" loop preload="none">
+        <audio id="musica" loop preload="metadata">
         </audio>
         <p id="musicEstado" class="music-status" role="status">
         </p>

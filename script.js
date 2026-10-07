@@ -436,29 +436,61 @@ function configurarMusica() {
     if (!evento.musica) return;
 
     const audio = document.getElementById('musica');
-    const boton = document.getElementById('musicBtn');
+    const flotante = document.getElementById('musicBtn');
+    const portada = document.getElementById('musicPortadaBtn');
     const estado = document.getElementById('musicEstado');
+    let iniciando = false;
 
     audio.src = evento.musica;
-    boton.hidden = false;
+    audio.volume = 0.45;
+    flotante.hidden = false;
+    document.getElementById('musicaPortada').hidden = false;
 
-    boton.addEventListener('click', async () => {
+    function actualizarControles() {
+        const sonando = !audio.paused;
+        flotante.textContent = sonando ? 'Ⅱ' : '♫';
+        flotante.setAttribute('aria-label', sonando ? 'Pausar música' : 'Escuchar música');
+        flotante.title = sonando ? 'Pausar música' : 'Escuchar música';
+        portada.textContent = sonando ? 'Ⅱ Pausar música' : '♫ Escuchar música';
+    }
+
+    async function reproducir() {
+        if (iniciando) return;
+        iniciando = true;
         try {
-            if (audio.paused) {
-                await audio.play();
-                boton.textContent = 'Ⅱ';
-                boton.setAttribute('aria-label', 'Pausar música');
-            } else {
-                audio.pause();
-                boton.textContent = '♫';
-                boton.setAttribute('aria-label', 'Reproducir música');
-            }
-
+            await audio.play();
             estado.textContent = '';
-        } catch {
-            estado.textContent = 'La música todavía no está disponible.';
+        } catch (error) {
+            if (error.name === 'NotAllowedError') {
+                estado.textContent = 'Toca «Escuchar música» para iniciar la canción.';
+            } else {
+                estado.textContent = 'No se pudo reproducir la canción. Intenta de nuevo.';
+            }
+        } finally {
+            iniciando = false;
+            actualizarControles();
         }
+    }
+
+    function alternarMusica() {
+        if (audio.paused) {
+            reproducir();
+        } else {
+            audio.pause();
+            estado.textContent = '';
+        }
+    }
+
+    audio.addEventListener('play', actualizarControles);
+    audio.addEventListener('pause', actualizarControles);
+    audio.addEventListener('error', () => {
+        estado.textContent = 'La canción no pudo cargarse. Revisa tu conexión e intenta de nuevo.';
+        actualizarControles();
     });
+    flotante.addEventListener('click', alternarMusica);
+    portada.addEventListener('click', alternarMusica);
+    actualizarControles();
+    reproducir();
 }
 
 function iniciarInvitacion() {

@@ -637,4 +637,9 @@ form button {
 @media (max-width:600px) { .amigos-dino { gap: 10px; } .dino-amigo { height: 78px; } }
 @media (prefers-reduced-motion:reduce) { .dino-amigo, .pterodactilo { animation: none; } }
 
+.musica-portada { margin: 20px auto; max-width: 330px; }
+.musica-portada p { font-size: 12px; color: #6c7a68; margin-bottom: 10px; }
+.musica-portada button { font-size: 13px; padding: 10px 22px; }
+.music-status { border-radius: 12px; padding: 10px 14px; box-shadow: 0 4px 20px #0001; }
+
 .aviso-prueba { padding: 10px 18px; text-align:center; background:#e2ead8; color:#43564b; font-size:12px; }

@@ -30,5 +30,5 @@ window.EVENTO = {
         'mael-recuerdo-11.png',
         'mael-recuerdo-12.png',
     ],
-    musica: '', // Por ejemplo: 'audio/musica.mp3'.
+    musica: 'musica-mael.mp3',
 };
